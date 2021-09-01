@@ -1,4 +1,4 @@
-let firstName, lastName, age, team, operation, option, operationResult;
+/* let firstName, lastName, age, team, operation, option, operationResult;
 
 firstName = prompt("¿Cómo es tu nombre?");
 lastName = prompt("¿Cómo es tu apellido?");
@@ -33,4 +33,37 @@ function doOperation(operation) {
 result = `Hola, tu nombre completo es <strong>${firstName} ${lastName}</strong>. <br />Tenes <strong>${parseInt(age)}</strong> años. <br />Sos de <strong>${team}</strong>. <br />El resultado de la operación es: <strong>${operationResult}</strong>.`;
 
 document.write(result);
-console.log(result);
+console.log(result); */
+
+/* CLASE 3 */
+
+let isConfirm = confirm("¿Queres saber cuántos días viviste en base a tu edad?");
+
+if (isConfirm) {
+    execAlgorithm()
+} else {
+    alert('Has cancelado la pregunta.\nRefrescá la página para repetir.')
+}
+
+function execAlgorithm() {
+    const age = parseInt(prompt("Ingresa tu edad."))
+    let ageIterate = age
+    let date = new Date()
+    let count = 0
+
+    while (ageIterate > 0) {
+        ageIterate--
+        count++
+
+        if (count == 10)
+            console.log(`Solo para recordarte: Hace 10 años tenías -> ${ageIterate} años.`)
+
+    }
+
+    console.log('Calculando resultado...')
+
+    setTimeout(() => {
+        console.log(`En base a tu edad: Viviste ${age * 365} días. \n Y según tu edad, naciste en el año -> ${new Date(date.setMonth(date.getMonth() - (age * 12))).getFullYear()}`)
+    }, 1500)
+
+}
