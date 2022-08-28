@@ -1,10 +1,35 @@
 let history = []
 let isRunning = true
 
+class Person {
+  constructor(firstName, lastName) {
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+
+  getFirstName() {
+    return this.firstName
+  }
+
+  getLastName() {
+    return this.lastName
+  }
+
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`
+  }
+
+}
+
 try {
-  while (isRunning) {
-    const fullName = prompt('Ingresá tu nombre completo.')
-    assertValueOrFail(fullName)
+  do {
+    const firstName = prompt('Ingresá tu nombre.')
+    assertValueOrFail(firstName)
+
+    const lastName = prompt('Ingresá tu apellido.')
+    assertValueOrFail(lastName)
+
+    const person = new Person(firstName, lastName)
 
     const totalDistance = parseInt(prompt('Ingresá la distancia total de la ruta en km: '))
     assertValueOrFail(totalDistance)
@@ -26,13 +51,13 @@ try {
     const totalCost = (totalDistance / 100 * fuelConsumption * price).toFixed(2)
     const totalFuel = (totalDistance / 100 * fuelConsumption).toFixed(2)
 
-    history = [...history, fullName]
+    history = [...history, { firstName: person.getFirstName(), lastName: person.getLastName(), fullName: person.getFullName(), date: new Date().toISOString()}]
     alert(`El costo total de la ruta es de $${totalCost} y se necesita ${totalFuel} litros de combustible.`)
 
     if (!isRunning) {
-      console.log(`Se agregó a <${fullName}> al historial de cálculos.`)
+      console.log(`Se agregó a <${person.getFullName()}> al historial de cálculos.`)
     }
-  }
+  } while (isRunning)
 } catch (err) {
   console.log(err)
 }
