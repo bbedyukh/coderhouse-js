@@ -1,7 +1,7 @@
 let simulations = localStorage.getItem('simulations') != null ? JSON.parse(localStorage.getItem('simulations')) : []
 
 class Simulation {
-  constructor(firstName, lastName, totalDistance, fuelConsumption, fuelPrice) {
+  constructor (firstName, lastName, totalDistance, fuelConsumption, fuelPrice) {
     this.firstName = firstName
     this.lastName = lastName
     this.totalDistance = totalDistance
@@ -9,35 +9,35 @@ class Simulation {
     this.fuelPrice = fuelPrice
   }
 
-  getFirstName() {
+  getFirstName () {
     return this.firstName
   }
 
-  getLastName() {
+  getLastName () {
     return this.lastName
   }
 
-  getFullName() {
+  getFullName () {
     return `${this.firstName} ${this.lastName}`
   }
 
-  getTotalDistance() {
+  getTotalDistance () {
     return this.totalDistance
   }
 
-  getFuelConsumption() {
+  getFuelConsumption () {
     return this.fuelConsumption
   }
 
-  getFuelPrice() {
+  getFuelPrice () {
     return this.fuelPrice
   }
 
-  getTotalCost() {
+  getTotalCost () {
     return (this.totalDistance / 100 * this.fuelConsumption * this.fuelPrice).toFixed(2)
   }
 
-  getTotalFuel() {
+  getTotalFuel () {
     return (this.totalDistance / 100 * this.fuelConsumption).toFixed(2)
   }
 }
@@ -48,8 +48,7 @@ const initSimulation = () => {
   const totalDistance = parseInt(document.querySelector('#totalDistance').value)
   const fuelConsumption = parseInt(document.querySelector('#fuelConsumption').value)
   const fuelPrice = parseInt(document.querySelector('#fuelPrice').value)
-  if (!firstName || !lastName || !totalDistance || !fuelConsumption || !fuelPrice)
-    throw new Error('Some field is empty.')
+  if (!firstName || !lastName || !totalDistance || !fuelConsumption || !fuelPrice) { throw new Error('Some field is empty.') }
   return new Simulation(firstName, lastName, totalDistance, fuelConsumption, fuelPrice)
 }
 
@@ -97,12 +96,11 @@ try {
     </div>
     `
 
-    const backBtn = document.querySelector("#back")
+    const backBtn = document.querySelector('#back')
     backBtn.addEventListener('click', (e) => {
       e.preventDefault()
       location.reload()
     })
-
   })
 } catch (err) {
   console.error(err)
