@@ -14,8 +14,12 @@
   <div class="container-md">
     <div id="layout" class="d-flex justify-content-center align-items-center min-vh-100">
       <div class="row g-3">
-        <div class="col-12">
+        <div class="col-12 d-flex justify-content-around">
           <h1 class="display-1 text-center">Fuel simulation</h1>
+          <button class="btn btn-secondary my-auto" data-bs-toggle="modal" data-bs-target="#modalAvatar">Fetch Github avatar</button>
+            <div class="text-center my-auto">
+              <img class="visually-hidden" width="50" height="auto" id="img-avatar" src="" class="rounded" alt="Avatar">
+            </div>
         </div>
         <div class="col-md-6">
           <label for="firstName" class="form-label">Firstname</label>
@@ -68,6 +72,28 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalAvatar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="label-avatar" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="label-avatar">Avatar</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modal-body-avatar">
+            <div class="mb-3">
+              <label for="avatar" class="form-label">Github User</label>
+              <input class="form-control" id="avatarInput" placeholder="bbedyukh">
+            </div>
+            <div class="alert alert-danger mb-3 visually-hidden" role="alert" id="alert-avatar">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="confirmAvatar">Confirm</button>
           </div>
         </div>
       </div>

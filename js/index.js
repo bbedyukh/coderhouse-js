@@ -1,4 +1,4 @@
-let simulations = localStorage.getItem('simulations') != null ? JSON.parse(localStorage.getItem('simulations')) : []
+let simulations = window.localStorage.getItem('simulations') != null ? JSON.parse(window.localStorage.getItem('simulations')) : []
 
 class Simulation {
   constructor (firstName, lastName, totalDistance, fuelConsumption, fuelPrice) {
@@ -56,6 +56,39 @@ try {
   const simulateBtn = document.querySelector('#simulate')
   const simulationsBtn = document.querySelector('#simulations')
   const layout = document.querySelector('#layout')
+  const confirmAvatar = document.querySelector('#confirmAvatar')
+
+  confirmAvatar.addEventListener('click', async () => {
+    const username = document.querySelector('#avatarInput').value
+    if (!username) {
+      const alertAvatar = document.querySelector('#alert-avatar')
+      alertAvatar.textContent = 'No ingresaste un nombre de usuario.'
+
+      if (alertAvatar.classList.contains('visually-hidden')) {
+        alertAvatar.classList.remove('visually-hidden')
+      }
+
+      setTimeout(() => {
+        alertAvatar.classList.add('visually-hidden')
+      }, 3000)
+
+      return
+    }
+    const githubResponse = await fetch(`https://api.github.com/users/${username}`)
+    if (githubResponse.status !== 200) return
+
+    const githubUser = await githubResponse.json()
+
+    const imgAvatar = document.querySelector('#img-avatar')
+    if (imgAvatar.classList.contains('visually-hidden')) {
+      imgAvatar.classList.remove('visually-hidden')
+      imgAvatar.classList.add('rounded')
+    }
+    imgAvatar.src = githubUser.avatar_url
+    const myModalEl = document.querySelector('#modalAvatar')
+    const modal = bootstrap.Modal.getInstance(myModalEl)
+    modal.hide()
+  })
 
   simulationsBtn.addEventListener('click', (e) => {
     const modalBody = document.querySelector('#modalBody')
@@ -78,7 +111,7 @@ try {
     e.preventDefault()
     const simulation = initSimulation()
     simulations = [...simulations, simulation]
-    localStorage.setItem('simulations', JSON.stringify(simulations))
+    window.localStorage.setItem('simulations', JSON.stringify(simulations))
     layout.innerHTML = `
     <div class="row g-3">
       <div class="col-12">
@@ -99,7 +132,7 @@ try {
     const backBtn = document.querySelector('#back')
     backBtn.addEventListener('click', (e) => {
       e.preventDefault()
-      location.reload()
+      window.location.reload()
     })
   })
 } catch (err) {
